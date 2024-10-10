@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_eduhub_course,access_eduhub_course,model_eduhub_course,base.group_user,1,1,1,1
+access_eduhub_course_tag,access_eduhub_course_tag,model_eduhub_course_tag,base.group_user,1,1,1,1
+
+access_eduhub_group,access_eduhub_group,model_eduhub_group,base.group_user,1,1,1,1
+access_eduhub_week_day,access_eduhub_week_day,model_eduhub_week_day,base.group_user,1,1,1,1
+
+access_eduhub_invoice_admin,access_eduhub_invoice_admin,model_eduhub_invoice,group_eduhub_admin,1,1,1,1
+access_eduhub_invoice_administrator,access_eduhub_invoice_administrator,model_eduhub_invoice,group_eduhub_administrator,1,0,0,0
+
+access_eduhub_invoice_payment_admin,access_eduhub_invoice_payment_admin,model_eduhub_invoice_payment,group_eduhub_admin,1,1,1,1
+access_eduhub_invoice_payment_administrator,access_eduhub_invoice_payment_administrator,model_eduhub_invoice_payment,group_eduhub_administrator,1,0,0,0
+
+access_eduhub_invoice_salary_admin,access_eduhub_invoice_salary_admin,model_eduhub_invoice_salary,group_eduhub_admin,1,1,1,1
+access_eduhub_invoice_salary_administrator,access_eduhub_invoice_salary_administrator,model_eduhub_invoice_salary,group_eduhub_administrator,0,0,0,0
+
+access_hr_employee_user,access_hr_employee_user,hr.model_hr_employee,base.group_user,1,1,1,1

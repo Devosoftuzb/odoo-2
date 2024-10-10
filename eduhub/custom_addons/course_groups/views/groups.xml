@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="eduhub_group_form_view" model="ir.ui.view">
+            <field name="name">eduhub.group.form</field>
+            <field name="model">eduhub.group</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <header>
+                        <field name="status" widget="statusbar" options="{'clickable': True}" />
+                    </header>
+
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="create_date"/>
+                            </group>
+                            <group>
+                                <field name="write_date"/>
+                            </group>
+                            <group>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="course_id" options="{'no_create': True}" />
+                            </group>
+                            <group>
+                                <field name="start_time" />
+                            </group>
+                            <group>
+                                <field name="days" widget="many2many_tags" options="{'no_create': True}" />
+                            </group>
+                            <group>
+                                <field name="end_time" />
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Students">
+                                <field name="students_ids" />
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" />                                                                                                                                                            " />
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="eduhub_group_tree_view" model="ir.ui.view">
+            <field name="name">eduhub.group.tree</field>
+            <field name="model">eduhub.group</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="create_date"/>
+                    <field name="name"/>
+                    <field name="course_id" />
+                    <field name="start_time" />
+                    <field name="end_time" />
+                    <field name="days" />
+                    <field name="students_count" />
+                    <field name="status" />
+                    <button name="action_active" type="object" icon="fa-check" string="Activate" class="btn btn-primary" />
+                    <button name="action_inactive" type="object" icon="fa-times" string="Deactivate" class="btn btn-danger" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="eduhub_group_calendar_view" model="ir.ui.view">
+            <field name="name">eduhub.group.calendar</field>
+            <field name="model">eduhub.group</field>
+            <field name="arch" type="xml">
+                <calendar string="Group Calendar" date_start="start_time_datetime" date_stop="end_time_datetime">
+                    <field name="name"/>
+                    <field name="days" />
+                </calendar>
+            </field>
+        </record>
+
+        <record id="eduhub_group_graph_view" model="ir.ui.view">
+            <field name="name">eduhub.group.graph</field>
+            <field name="model">eduhub.group</field>
+            <field name="arch" type="xml">
+                <graph string="ModelTitle">
+                    <field name="name"/>
+                    <field name="students_count" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="eduhub_group_pivot_view" model="ir.ui.view">
+            <field name="name">eduhub.group.pivot</field>
+            <field name="model">eduhub.group</field>
+            <field name="arch" type="xml">
+                <pivot string="EduHUB Group Pivot View">
+                    <field name="students_count" type="row"/>
+                    <field name="days" type="measure" />
+                    <field name="course_id" type="row" />
+                </pivot>
+            </field>
+        </record>
+
+        <record id="eduhub_group_search_view" model="ir.ui.view">
+            <field name="name">eduhub.group.search</field>
+            <field name="model">eduhub.group</field>
+            <field name="arch" type="xml">
+                <search string="ModelTitle">
+                    <filter string="Active" name="active" domain="[('status', '=', 'active')]" />
+                    <filter string="Inactive" name="inactive" domain="[('status', '=', 'inactive')]" />
+                    <group expand="1" string="Group By">
+                        <filter string="Course" name="course" domain="[]"
+                                context="{'group_by':'course_id'}"/>
+                        <filter string="Status" name="status"
+                                context="{'group_by':'status'}"/>
+                        <filter string="Days" name="days"
+                                context="{'group_by':'days'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="eduhub_group_kanban_view" model="ir.ui.view">
+            <field name="name">eduhub.group.kanban</field>
+            <field name="model">eduhub.group</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="days">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <field name="name"/>
+                                    </strong>
+
+                                    <div class="time">
+                                        <field name="start_time" /> -
+                                        <field name="end_time" />
+                                    </div>
+
+                                    <div class="O_kanban_record_buttons">
+                                        <div class="oe_kanban_button_left">
+                                            <field name="students_count" /> Student(s)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="eduhub_group_act_window" model="ir.actions.act_window">
+            <field name="name">Groups</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">eduhub.group</field>
+            <field name="view_mode">kanban,tree,form,calendar,graph,pivot</field>
+            <field name="context">{"search_default_example_field":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="eduhub_groups_menu" name="Groups" parent="eduhub_root_menu" action="eduhub_group_act_window" sequence="10" />
+
+    </data>
+</odoo>
