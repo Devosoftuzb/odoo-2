@@ -71,7 +71,7 @@
             </field>
         </record>
 
-        <menuitem id="eduhub_invoices_menu" name="Salaries" parent="eduhub_root_menu" action="eduhub_invoice_salary_act_window" sequence="10" />
+        <menuitem id="eduhub_salaries_menu" name="Salaries" parent="eduhub_root_menu" action="eduhub_invoice_salary_act_window" sequence="10" />
 
     </data>
 </odoo>
